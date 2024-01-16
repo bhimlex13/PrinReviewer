@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PRINCIPLE OF COMMUNICATION PRELIM</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-size: 16px;
+            /* Adjust the base font size */
+        }
+
+        .container {
+            max-width: 800px;
+            /* Adjust the maximum width of the container */
+        }
+
+        .form-group label,
+        .form-check-label {
+            font-size: 18px;
+            /* Adjust the font size for question labels */
+        }
+
+        .form-check-input {
+            display: none;
+            /* Hide the default radio button */
+        }
+
+        .form-check {
+            margin-bottom: 10px;
+            /* Adjust the space between options */
+            padding-left: 0;
+        }
+
+        .form-check label {
+            cursor: pointer;
+            padding: 10px;
+            border: 2px solid #ddd;
+            /* Add outline to each option */
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+            /* Smooth transition effect */
+        }
+
+        .form-check input:checked+label {
+            background-color: lightgrey;
+            /* Change background color when checked */
+            color: black;
+            /* Change text color when checked */
+            border-color: #007bff;
+            /* Change outline color when checked */
+        }
+
+        .btn-group {
+            margin-top: 20px;
+            /* Add margin to the top of the button group */
+        }
+
+        .btn-primary {
+            font-size: 18px;
+            /* Adjust the font size for the Submit button */
+        }
+
+        .btn-next {
+            display: none;
+            /* Initially hide the Next button */
+            background-color: darkgreen;
+        }
+
+        #result {
+            font-size: 18px;
+            /* Adjust the font size for the result message */
+        }
+
+        .navbar {
+            background-color: #007bff;
+            /* Set the background color of the navbar */
+        }
+
+        .navbar a {
+            color: white;
+            /* Set the text color of the navbar links */
+        }
+
+        #final-result {
+            font-size: 24px;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #007bff;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="./index.html">Home</a>
+    </nav>
+
+    <div class="progress mt-4">
+        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+            aria-valuemax="100"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="mt-4 mb-4">Principle of communication Prelim</h1>
+        <form id="quiz-form" onsubmit="event.preventDefault(); submitAnswer();">
+            <!-- Question will be inserted here by JavaScript -->
+        </form>
+        <div class="btn-group d-flex">
+            <button class="btn btn-primary mt-4 mr-2" onclick="submitAnswer()">Submit</button>
+            <button class="btn btn-primary mt-4 btn-next" onclick="nextQuestion()">Next</button>
+        </div>
+        <div id="result" class="mt-4"></div>
+    </div>
+
+    <div id="final-result" class="mt-4 d-none"></div>
+
+
+    <!-- Add Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script>
+        // This is the data for the quiz questions, answers, and choices
+        var quizData = [
+            {
+                "question": "The following is an example of a Transmitter EXCEPT one.",
+                "answer": "Telegram",
+                "choices": [
+                    "Radio",
+                    "Television",
+                    "Mobile Phone",
+                    "Telegram"
+                ]
+            },
+            {
+                "question": "Type of communication channel used “listens” for underwater sounds with sensitives",
+                "answer": "Sonars",
+                "choices": [
+                    "Electrical Conductor",
+                    "Optical Media",
+                    "Sonars",
+                    "Wireless Media"
+                ]
+            },
+            {
+                "question": "The communication between sender and receiver occurs in both directions in transmission, but only one at a time. The sender and receiver can both send and receive the information, but only one is allowed to send at any given time.",
+                "answer": "Half Duplex Communication",
+                "choices": [
+                    "Duplex Communication",
+                    "Half Duplex Communication",
+                    "Simplex Communication",
+                    "Analog Communication"
+                ]
+            },
+            {
+                "question": "The following is kind of Non-verbal communication EXCEPT one.",
+                "answer": "Phone Call",
+                "choices": [
+                    "Body Language",
+                    "Facial Expressions",
+                    "Gestures",
+                    "Phone Call"
+                ]
+            },
+            {
+                "question": "The is the unit of frequency in the International System of Units.",
+                "answer": "Hertz",
+                "choices": [
+                    "Hertz",
+                    "Joule",
+                    "Newton",
+                    "Watt"
+                ]
+            },
+            {
+                "question": "ITU stands for?",
+                "answer": "International Telecommunication Union",
+                "choices": [
+                    "International Telecommunication Union",
+                    "International Trade Union",
+                    "International Transport Union",
+                    "International Training Union"
+                ]
+            },
+            {
+                "question": "is exchanging any type of message between a sender and receiver. It can be a plain conversation between friends about their thoughts, ideas, and feelings.",
+                "answer": "Communication",
+                "choices": [
+                    "Communication",
+                    "Conversation",
+                    "Discussion",
+                    "Dialogue"
+                ]
+            },
+            {
+                "question": "Types of communication channel that conducts electricity and allows the flow of charge such metals and metal alloys.",
+                "answer": "Electrical Conductor",
+                "choices": [
+                    "Electrical Conductor",
+                    "Optical Media",
+                    "Sonars",
+                    "Wireless Media"
+                ]
+            },
+            {
+                "question": "Types of frequency in the range of 300 kilohertz (kHz) to 3 megahertz (MHz). This used for FM radio broadcasting.",
+                "answer": "Medium Frequency",
+                "choices": [
+                    "High Frequency",
+                    "Low Frequency",
+                    "Medium Frequency",
+                    "Ultra High Frequency"
+                ]
+            },
+            {
+                "question": "It is the medium wherein an electronic signal is sent from one point to another.",
+                "answer": "Communication Channel",
+                "choices": [
+                    "Transmitter",
+                    "Receiver",
+                    "Amplifier",
+                    "Communication Channel"
+                ]
+            },
+            {
+                "question": "The resulting system is known as radio when free space is the channel. Radio is the term applied to any wireless communication from point to point.",
+                "answer": "Free Space",
+                "choices": [
+                    "Wired",
+                    "Optical",
+                    "Free Space",
+                    "Coaxial"
+                ]
+            },
+            {
+                "question": "is communication uses such as eye contact, facial expressions, gestures, posture, use of objects and body language.",
+                "answer": "Non-verbal",
+                "choices": [
+                    "Verbal",
+                    "Written",
+                    "Non-verbal",
+                    "Digital"
+                ]
+            },
+            {
+                "question": "The first step in sending a message is to convert it into an electronic form suitable for transmission.",
+                "answer": "Transmitter",
+                "choices": [
+                    "Receiver",
+                    "Amplifier",
+                    "Decoder",
+                    "Transmitter"
+                ]
+            },
+            {
+                "question": "Type of receiver where a circuit capable of amplifying specific frequencies while attenuating others.",
+                "answer": "Filters",
+                "choices": [
+                    "Amplifiers",
+                    "Tuned Circuits",
+                    "Filters",
+                    "Oscillators"
+                ]
+            },
+            {
+                "question": "Use an echo-reflecting technique for determining how far away objects underwater are and in what direction they are moving.",
+                "answer": "Active Sonar",
+                "choices": [
+                    "Passive Sonar",
+                    "Active Sonar",
+                    "Infrared",
+                    "Radar"
+                ]
+            },
+            {
+                "question": "What is another term for Intelligence Signal?",
+                "answer": "Information",
+                "choices": [
+                    "Data",
+                    "Signal",
+                    "Information",
+                    "Message"
+                ]
+            },
+            {
+                "question": "Type of receiver that produce a continuous, repeated, and alternating waveform without input.",
+                "answer": "Oscillators",
+                "choices": [
+                    "Amplifiers",
+                    "Tuned Circuits",
+                    "Filters",
+                    "Oscillators"
+                ]
+            },
+            {
+                "question": "In electronics, refers to communication that uses a transmitter, communication channel, and receiver with the use of electronic signals.",
+                "answer": "Communication Systems",
+                "choices": [
+                    "Communication Devices",
+                    "Communication Systems",
+                    "Communication Channels",
+                    "Communication Protocols"
+                ]
+            },
+            {
+                "question": "a camera converts light information in the scene to a video signal.",
+                "answer": "TV",
+                "choices": [
+                    "Radio",
+                    "TV",
+                    "Computer",
+                    "Mobile Phone"
+                ]
+            },
+            {
+                "question": "Types of frequency ranged from 30–300 kHz.",
+                "answer": "Low Frequency",
+                "choices": [
+                    "High Frequency",
+                    "Low Frequency",
+                    "Medium Frequency",
+                    "Ultra High Frequency"
+                ]
+            },
+            {
+                "question": "is used to convert the sound to an electronic audio signal for voice messages.",
+                "answer": "Microphone",
+                "choices": [
+                    "Speaker",
+                    "Microphone",
+                    "Headphones",
+                    "Earphones"
+                ]
+            },
+            {
+                "question": "Type of receiver that combine two or more electronic signals into one or two output signals.",
+                "answer": "Mixer",
+                "choices": [
+                    "Amplifier",
+                    "Tuner",
+                    "Decoder",
+                    "Mixer"
+                ]
+            }
+        ];
+
+        var currentQuestionIndex = 0;
+        var answered = false; // Variable to track whether the question has been answered
+
+        // This function creates the quiz form
+        function createQuiz() {
+            answered = false; // Reset the answered status for each new question
+            var form = document.getElementById('quiz-form');
+            var question = quizData[currentQuestionIndex];
+            var questionDiv = document.createElement('div');
+            questionDiv.className = 'form-group';
+            questionDiv.innerHTML = '<label>' + question.question + '</label>';
+            for (var j = 0; j < question.choices.length; j++) {
+                var choice = question.choices[j];
+                var choiceId = 'question' + currentQuestionIndex + 'choice' + j;
+                questionDiv.innerHTML += '<div class="form-check"><input class="form-check-input" type="radio" id="' + choiceId + '" name="question" value="' + choice + '"><label class="form-check-label" for="' + choiceId + '">' + choice + '</label></div>';
+            }
+            form.innerHTML = '';
+            form.appendChild(questionDiv);
+            document.querySelector('.btn-next').style.display = 'none'; // Hide Next button initially
+            document.querySelector('.btn-primary').style.display = 'block'; // Show Submit button initially
+            // Hide the final result container initially
+            document.getElementById('final-result').classList.add('d-none');
+        }
+
+        // This function checks the answer and shows the next question
+        function submitAnswer() {
+
+
+            var form = document.getElementById('quiz-form');
+            var selectedOption = form.querySelector('input[name="question"]:checked');
+
+            console.log("Selected Option:", selectedOption); // Log the selected option
+
+
+            if (!selectedOption) {
+                // No option selected
+                var result = document.getElementById('result');
+                result.textContent = 'Incorrect. No option selected.';
+                result.style.color = 'red';
+                answered = true; // Set the answered status to true
+                document.querySelector('.btn-next').style.display = 'block'; // Show Next button
+                document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
+                disableOptions(); // Disable options after marking as incorrect
+                return;
+            }
+
+            if (answered) return; // If already answered, do nothing
+            var answer = selectedOption.value;
+            var result = document.getElementById('result');
+            if (answer === quizData[currentQuestionIndex].answer) {
+                result.textContent = 'Correct!';
+                result.style.color = 'green';
+            } else {
+                result.textContent = 'Incorrect. The correct answer was: ' + quizData[currentQuestionIndex].answer;
+                result.style.color = 'red';
+                highlightCorrectAnswer();
+            }
+            answered = true; // Set the answered status to true
+            disableOptions(); // Disable options after submitting answer
+            document.querySelector('.btn-next').style.display = 'block'; // Show Next button
+            document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
+        }
+
+        // This function disables the options after submitting the answer
+        function disableOptions() {
+            var options = document.querySelectorAll('.form-check input');
+            options.forEach(function (option) {
+                option.disabled = true;
+            });
+        }
+
+        function nextQuestion() {
+    var progress = (currentQuestionIndex + 1) / quizData.length * 100;
+    document.querySelector('.progress-bar').style.width = progress + '%';
+    var result = document.getElementById('result');
+    result.textContent = '';
+
+    var selectedOption = document.querySelector('input[name="question"]:checked');
+    if (selectedOption) {
+        selectedOption.checked = false;
+    }
+
+    currentQuestionIndex++;
+
+    if (currentQuestionIndex < quizData.length) {
+        setTimeout(function () {
+            createQuiz();
+        }, 50);  // Adjust the delay time if needed
+    } else {
+        result.textContent = 'Quiz completed!';
+        result.style.color = 'black';
+        document.querySelector('.btn-next').style.display = 'none';
+    }
+
+    answered = false;
+    document.querySelector('.btn-next').style.display = 'none';
+    document.querySelector('.btn-primary').style.display = 'block';
+
+    console.log("Current Index after moving:", currentQuestionIndex);
+
+    if (currentQuestionIndex === quizData.length) {
+        displayFinalResult();
+    }
+}
+
+
+
+        // This function highlights the correct answer
+        function highlightCorrectAnswer() {
+            var correctAnswer = quizData[currentQuestionIndex].answer;
+            var labels = document.querySelectorAll('.form-check label');
+            labels.forEach(function (label) {
+                if (label.textContent === correctAnswer) {
+                    label.style.backgroundColor = 'lightgreen';
+                }
+            });
+        }
+
+        function displayFinalResult() {
+            var resultContainer = document.getElementById('final-result');
+            resultContainer.textContent = 'Quiz completed! Your final result is: ' + calculateScore() + ' out of ' + quizData.length;
+            resultContainer.style.color = 'black';
+            resultContainer.classList.remove('d-none'); // Remove the 'd-none' class to show the container
+        }
+
+        function calculateScore() {
+            var correctAnswers = 0;
+            for (var i = 0; i < quizData.length; i++) {
+                var selectedAnswer = getSelectedAnswer(i);
+                console.log("Question " + (i + 1) + ": Selected - " + selectedAnswer + ", Correct - " + quizData[i].answer);
+                if (selectedAnswer !== null && selectedAnswer === quizData[i].answer) {
+                    correctAnswers++;
+                }
+            }
+            console.log("Total Correct Answers: " + correctAnswers);
+            return correctAnswers;
+        }
+
+
+        function getSelectedAnswer(index) {
+            var form = document.getElementById('quiz-form');
+            var radioButtons = form.querySelectorAll('input[name="question"]');
+
+            for (var i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i].checked) {
+                    return radioButtons[i].value;
+                }
+            }
+
+            return null;
+        }
+
+
+        // Create the quiz when the page loads
+        window.onload = createQuiz;
+    </script>
+</body>
+
+</html>
