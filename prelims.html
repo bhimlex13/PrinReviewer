@@ -5,13 +5,14 @@
   <title>PRINCIPLE OF COMMUNICATION PRELIM</title>
   <!-- Add Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
   <style>
     body {
       font-size: 2rem;
       /* Adjust the base font size */
     }
 
-    label{
+    label {
       margin-bottom: 1.5rem;
     }
 
@@ -25,7 +26,6 @@
       margin: 0 auto;
       /* Center the container */
     }
-
 
     .form-group label,
     .form-check-label {
@@ -122,7 +122,7 @@
       cursor: pointer;
       font-size: 1.5rem;
     }
-    
+
     /* Custom styles for the toggle button */
     #toggle-btn {
       width: 4.5rem;
@@ -133,7 +133,7 @@
       font-size: 2rem;
       cursor: pointer;
       border-radius: 50%;
-      background-color: orange;
+      background-color: #0056b3;
       color: whitesmoke;
       padding: 10px;
       border: none;
@@ -141,9 +141,8 @@
     }
 
     #toggle-btn:hover {
-      background-color: #0056b3;
+      background-color: orange;
     }
-    
   </style>
 </head>
 
@@ -190,8 +189,6 @@
   </div>
 
   <button id="toggle-btn" onclick="toggleSidebar()">☰</button>
-
-
 
   <!-- Add Bootstrap JS and its dependencies -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
@@ -243,18 +240,18 @@
       }
     ];
 
-    //Script starts here
+    // Script Here
 
     // Function to toggle the visibility of the sidebar
     function toggleSidebar() {
       var sidebar = document.getElementById('sidebar');
       sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.display === '') ? 'block' : 'none';
     }
+
     // Function to clone an array
     function cloneArray(array) {
       return array.map(item => ({ ...item }));
     }
-
 
     // Function to shuffle an array
     function shuffleArray(array) {
@@ -263,7 +260,6 @@
       }
       return array;
     }
-
 
     var currentQuestionIndex = 0;
     var answered = false; // Variable to track whether the question has been answered
@@ -310,10 +306,6 @@
       createQuiz();
     }
 
-
-
-
-
     // This function checks the answer and shows the next question
     function submitAnswer() {
       var form = document.getElementById('quiz-form');
@@ -348,7 +340,6 @@
       document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
     }
 
-
     // This function disables the options after submitting the answer
     function disableOptions() {
       var options = document.querySelectorAll('.form-check input');
@@ -376,6 +367,10 @@
         result.textContent = 'Quiz completed!';
         result.style.color = 'black';
         document.querySelector('.btn-next').style.display = 'none';
+        document.querySelector('.btn-primary').textContent = 'Retry'; // Change button text to 'Retry'
+        document.querySelector('.btn-primary').onclick = function () {
+          location.reload(); // Reload the page on 'Retry' button click
+        };
       }
 
       answered = false;
@@ -383,10 +378,6 @@
       document.querySelector('.btn-primary').style.display = 'block';
 
       console.log("Current Index after moving:", currentQuestionIndex);
-
-      if (currentQuestionIndex === quizData.length) {
-        displayFinalResult();
-      }
     }
 
     // This function highlights the correct answer
@@ -400,7 +391,6 @@
         }
       });
     }
-
 
     function displayFinalResult() {
       var resultContainer = document.getElementById('final-result');
@@ -442,6 +432,7 @@
 
     // Create the quiz when the page loads
     window.onload = createQuiz;
+    
   </script>
 </body>
 
