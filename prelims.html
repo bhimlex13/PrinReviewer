@@ -111,16 +111,16 @@
       margin-top: 40px;
     }
 
-    #sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      overflow-y: auto;
-      background-color: #f8f9fa;
-      padding: 20px;
-      display: none;
-    }
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 20px;
+  display: none; /* Change 'block' to 'none' to hide the sidebar initially */
+}
 
     #sidebar a {
       display: block;
@@ -281,10 +281,11 @@
     // Script Here
 
     // Function to toggle the visibility of the sidebar
-    function toggleSidebar() {
-      var sidebar = document.getElementById('sidebar');
-      sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.display === '') ? 'block' : 'none';
-    }
+  // Function to toggle the visibility of the sidebar
+  function toggleSidebar() {
+    var sidebar = document.getElementById('sidebar');
+    sidebar.style.display = sidebar.style.display === 'none' || sidebar.style.display === '' ? 'block' : 'none';
+  }
 
     // Function to clone an array
     function cloneArray(array) {
@@ -304,6 +305,8 @@
 
     // This function creates the quiz form
     function createQuiz() {
+      // document.getElementById('sidebar').style.display = 'block';
+
       answered = false;
       var clonedQuizData = cloneArray(quizData);
       shuffleArray(clonedQuizData);
@@ -344,11 +347,12 @@
     }
 
 
-    // Function to navigate to a specific question
-    function goToQuestion(index) {
-      currentQuestionIndex = index;
-      createQuiz();
-    }
+  // Function to navigate to a specific question
+  function goToQuestion(index) {
+    currentQuestionIndex = index;
+    createQuiz();
+    toggleSidebar(); // Close the sidebar after clicking a question
+  }
 
     // This function checks the answer and shows the next question
     function submitAnswer() {
