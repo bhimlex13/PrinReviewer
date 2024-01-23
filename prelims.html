@@ -12,12 +12,18 @@
       /* Adjust the base font size */
     }
 
+    #question-number {
+      color: black;
+      font-weight: 400;
+      opacity: 50%;
+    }
+
     label {
       margin-bottom: 1.5rem;
     }
 
     .title {
-      font-size: 4rem;
+      font-size: 3rem;
     }
 
     .container {
@@ -29,7 +35,7 @@
 
     .form-group label,
     .form-check-label {
-      font-size: 2.5rem;
+      font-size: 1.5rem;
       /* Adjust the font size for question labels */
     }
 
@@ -69,7 +75,7 @@
     }
 
     .btn-primary {
-      font-size: 3rem;
+      font-size: 2rem;
       /* Adjust the font size for the Submit button */
     }
 
@@ -143,6 +149,35 @@
     #toggle-btn:hover {
       background-color: orange;
     }
+
+    @media screen and (max-width: 768px) {
+      body {
+        font-size: 1.5rem;
+        /* Adjust the font size for mobile devices */
+      }
+
+      .form-group label,
+      .form-check-label {
+        font-size: 1.2rem;
+        /* Adjust the font size for question labels on mobile devices */
+      }
+
+      .btn-primary,
+      .btn-next {
+        font-size: 1.5rem;
+        /* Adjust the font size for buttons on mobile devices */
+      }
+
+      #result {
+        font-size: 1.5rem;
+        /* Adjust the font size for the result message on mobile devices */
+      }
+
+      .navbar a {
+        font-size: 1.8rem;
+        /* Adjust the font size for navbar links on mobile devices */
+      }
+    }
   </style>
 </head>
 
@@ -171,6 +206,9 @@
 
   <div class="container">
     <h1 class="title mt-4 mb-4">Principle of communication Prelim</h1>
+
+    <h3 id="question-number" class="mt-4 mb-4"></h3>
+
     <form id="quiz-form" onsubmit="event.preventDefault(); submitAnswer();">
       <!-- Question will be inserted here by JavaScript -->
     </form>
@@ -286,6 +324,11 @@
 
       form.innerHTML = '';
       form.appendChild(questionDiv);
+
+      // Update question number display
+      var questionNumber = document.getElementById('question-number');
+      questionNumber.textContent = ' Question: ' + (currentQuestionIndex + 1) + ' out of ' + quizData.length;
+
       document.querySelector('.btn-next').style.display = 'none';
       document.querySelector('.btn-primary').style.display = 'block';
       document.getElementById('final-result').classList.add('d-none');
@@ -299,6 +342,7 @@
         questionList.appendChild(listItem);
       }
     }
+
 
     // Function to navigate to a specific question
     function goToQuestion(index) {
@@ -432,7 +476,7 @@
 
     // Create the quiz when the page loads
     window.onload = createQuiz;
-    
+
   </script>
 </body>
 
