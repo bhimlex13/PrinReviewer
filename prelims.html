@@ -2,625 +2,447 @@
 <html>
 
 <head>
-    <title>PRINCIPLE OF COMMUNICATION PRELIM</title>
-    <!-- Add Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        body {
-            font-size: 2rem;
-            /* Adjust the base font size */
-        }
+  <title>PRINCIPLE OF COMMUNICATION PRELIM</title>
+  <!-- Add Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-size: 2rem;
+      /* Adjust the base font size */
+    }
 
-        .container {
-            max-width: 800px;
-            /* Adjust the maximum width of the container */
-        }
+    label{
+      margin-bottom: 1.5rem;
+    }
 
-        .form-group label,
-        .form-check-label {
-            font-size: 2.5rem;
-            /* Adjust the font size for question labels */
-        }
+    .title {
+      font-size: 4rem;
+    }
 
-        .form-check-input {
-            display: none;
-            /* Hide the default radio button */
-        }
+    .container {
+      max-width: 90%;
+      /* Adjust the maximum width of the container */
+      margin: 0 auto;
+      /* Center the container */
+    }
 
-        .form-check {
-            margin-bottom: 10px;
-            /* Adjust the space between options */
-            padding-left: 0;
-        }
 
-        .form-check label {
-            cursor: pointer;
-            padding: 10px;
-            border: 2px solid #ddd;
-            /* Add outline to each option */
-            display: block;
-            transition: background-color 0.3s, color 0.3s;
-            /* Smooth transition effect */
-        }
+    .form-group label,
+    .form-check-label {
+      font-size: 2.5rem;
+      /* Adjust the font size for question labels */
+    }
 
-        .form-check input:checked+label {
-            background-color: lightgrey;
-            /* Change background color when checked */
-            color: black;
-            /* Change text color when checked */
-            border-color: #007bff;
-            /* Change outline color when checked */
-        }
+    .form-check-input {
+      display: none;
+      /* Hide the default radio button */
+    }
 
-        .btn-group {
-            margin-top: 2rem;
-            /* Add margin to the top of the button group */
-        }
+    .form-check {
+      margin-bottom: 10px;
+      /* Adjust the space between options */
+      padding-left: 0;
+    }
 
-        .btn-primary {
-            font-size: 3rem;
-            /* Adjust the font size for the Submit button */
-        }
+    .form-check label {
+      cursor: pointer;
+      padding: 10px;
+      border: 2px solid #ddd;
+      /* Add outline to each option */
+      display: block;
+      transition: background-color 0.3s, color 0.3s;
+      /* Smooth transition effect */
+    }
 
-        .btn-next {
-            display: none;
-            /* Initially hide the Next button */
-            background-color: darkgreen;
-        }
+    .form-check input:checked+label {
+      background-color: lightgrey;
+      /* Change background color when checked */
+      color: black;
+      /* Change text color when checked */
+      border-color: #007bff;
+      /* Change outline color when checked */
+    }
 
-        #result {
-            font-size: 2rem;
-            /* Adjust the font size for the result message */
-        }
+    .btn-group {
+      margin-top: 2rem;
+      /* Add margin to the top of the button group */
+    }
 
-        .navbar {
-            background-color: #007bff;
-            /* Set the background color of the navbar */
-        }
+    .btn-primary {
+      font-size: 3rem;
+      /* Adjust the font size for the Submit button */
+    }
 
-        .navbar a {
-            color: white;
-            font-size: 2rem;
-            /* Set the text color of the navbar links */
-        }
+    .btn-next {
+      display: none;
+      /* Initially hide the Next button */
+      background-color: darkgreen;
+    }
 
-        #final-result {
-            font-size: 24px;
-            text-align: center;
-            padding: 20px;
-            border: 2px solid #007bff;
-            border-radius: 10px;
-            background-color: #f8f9fa;
-            margin-top: 40px;
-        }
+    #result {
+      font-size: 2rem;
+      /* Adjust the font size for the result message */
+    }
 
-    </style>
+    .navbar {
+      background-color: #007bff;
+      /* Set the background color of the navbar */
+    }
+
+    .navbar a {
+      color: white;
+      font-size: 2rem;
+      /* Set the text color of the navbar links */
+    }
+
+    #final-result {
+      font-size: 24px;
+      text-align: center;
+      padding: 20px;
+      border: 2px solid #007bff;
+      border-radius: 10px;
+      background-color: #f8f9fa;
+      margin-top: 40px;
+    }
+
+    #sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      overflow-y: auto;
+      background-color: #f8f9fa;
+      padding: 20px;
+      display: none;
+    }
+
+    #sidebar a {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+    
+    /* Custom styles for the toggle button */
+    #toggle-btn {
+      width: 4.5rem;
+      height: 4.5rem;
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      font-size: 2rem;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: orange;
+      color: whitesmoke;
+      padding: 10px;
+      border: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #toggle-btn:hover {
+      background-color: #0056b3;
+    }
+    
+  </style>
 </head>
 
 <body>
 
+  <!-- Responsive navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <button id="toggle-btn" class="navbar-toggler" type="button" onclick="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="./index.html">Home</a>
 
-
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="./index.html">Home</a>
-    </nav>
-
-    <div class="progress mt-4">
-        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
-            aria-valuemax="100"></div>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="toggleSidebar()">Toggle Sidebar</a>
+        </li>
+      </ul>
     </div>
+  </nav>
 
-    <div class="container">
-        <h1 class="mt-4 mb-4">Principle of communication Prelim</h1>
-        <form id="quiz-form" onsubmit="event.preventDefault(); submitAnswer();">
-            <!-- Question will be inserted here by JavaScript -->
-        </form>
-        <div class="btn-group d-flex">
-            <button class="btn btn-primary mt-4 mr-2" onclick="submitAnswer()">Submit</button>
-            <button class="btn btn-primary mt-4 btn-next" onclick="nextQuestion()">Next</button>
-        </div>
-        <div id="result" class="mt-4"></div>
+  <div class="progress mt-4">
+    <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+      aria-valuemax="100"></div>
+  </div>
+
+  <div class="container">
+    <h1 class="title mt-4 mb-4">Principle of communication Prelim</h1>
+    <form id="quiz-form" onsubmit="event.preventDefault(); submitAnswer();">
+      <!-- Question will be inserted here by JavaScript -->
+    </form>
+    <div class="btn-group d-flex">
+      <button class="btn btn-primary mt-4 mr-2" onclick="submitAnswer()">Submit</button>
+      <button class="btn btn-primary mt-4 btn-next" onclick="nextQuestion()">Next</button>
     </div>
+    <div id="result" class="mt-4"></div>
+  </div>
 
-    <div id="final-result" class="mt-4 d-none"></div>
+  <div id="final-result" class="mt-4 d-none"></div>
 
+  <div id="sidebar">
+    <h3>Questions</h3>
+    <ul id="question-list"></ul>
+  </div>
 
-    <!-- Add Bootstrap JS and its dependencies -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <script>
-        // This is the data for the quiz questions, answers, and choices
-        var quizData = [
-  {
-    "question": "Types of communication channel that use optic cable or light pipe that carries the message on a light wave.",
-    "answer": "Optical Media",
-    "choices": [
-      "Electrical Conductor",
-      "Optical Media",
-      "Sonars",
-      "Wireless Media"
-    ]
-  },
-  {
-    "question": "What way of communication shown above?",
-    "answer": "Simplex Communication",
-    "choices": [
-      "Duplex Communication",
-      "Half Duplex Communication",
-      "Simplex Communication",
-      "Analog Communication"
-    ]
-  },
-  {
-    "question": "It is a set of electronic components and circuits that accept transmitted messages from the channel and translate them back, which humans understand.",
-    "answer": "Receiver",
-    "choices": [
-      "Transmitter",
-      "Receiver",
-      "Amplifier",
-      "Decoder"
-    ]
-  },
-  {
-    "question": "Type of receiver where resonant circuits, combine an inductor and capacitor to make a circuit responsive to a frequency.",
-    "answer": "Tuned Circuits",
-    "choices": [
-      "Amplifiers",
-      "Tuned Circuits",
-      "Filters",
-      "Oscillators"
-    ]
-  },
-  {
-    "question": "The message is typed on a keyboard and converted to binary codes stored in memory or transmitted serially.",
-    "answer": "Computer",
-    "choices": [
-      "Computer",
-      "Mobile Phone",
-      "Tablet",
-      "Smart Watch"
-    ]
-  },
-  {
-    "question": "What is the correct order of Block Diagram: I. Communication Channel II. Receiver III. Information Source IV. Transmitter",
-    "answer": "III, IV, I, II",
-    "choices": [
-      "I, II, III, IV",
-      "II, I, IV, III",
-      "III, IV, I, II",
-      "IV, III, II, I"
-    ]
-  },
-  {
-    "question": "This is a way of Communication that a system is a point-to-point system composed of two or more connected parties or devices that can communicate with one another in both directions.",
-    "answer": "Duplex Communication",
-    "choices": [
-      "Duplex Communication",
-      "Half Duplex Communication",
-      "Simplex Communication",
-      "Analog Communication"
-    ]
-  },
-  {
-    "question": "The process starts with the wherein the message originates, whether in the form of words, codes, symbols, or sound signals, and goes through a transmitter, a channel, and a receiver, and ends with the destination block, which is the final stage that receives the message signal and processes it to understand the information.",
-    "answer": "Information Source/Sender",
-    "choices": [
-      "Information Source/Sender",
-      "Receiver",
-      "Transmitter",
-      "Destination"
-    ]
-  },
-  {
-    "question": "What way of communication shown from the image above?",
-    "answer": "Full Duplex Communication",
-    "choices": [
-      "Duplex Communication",
-      "Half Duplex Communication",
-      "Simplex Communication",
-      "Full Duplex Communication"
-    ]
-  },
-  {
-    "question": "Types of receiver that produce an increased version of the input signal.",
-    "answer": "Amplifiers",
-    "choices": [
-      "Amplifiers",
-      "Tuned Circuits",
-      "Filters",
-      "Oscillators"
-    ]
-  },
-  {
-    "question": "This is the way of communication between sender and receiver can occur simultaneously. The sender and receiver can both transmit and receive at the same time.",
-    "answer": "Full Duplex Communication",
-    "choices": [
-      "Duplex Communication",
-      "Half Duplex Communication",
-      "Simplex Communication",
-      "Full Duplex Communication"
-    ]
-  },
-  {
-    "question": "The following is an example of a Transmitter EXCEPT one.",
-    "answer": "Telegram",
-    "choices": [
-      "Radio",
-      "Television",
-      "Mobile Phone",
-      "Telegram"
-    ]
-  },
-  {
-    "question": "Type of communication channel used “listens” for underwater sounds with sensitives",
-    "answer": "Sonars",
-    "choices": [
-      "Electrical Conductor",
-      "Optical Media",
-      "Sonars",
-      "Wireless Media"
-    ]
-  },
-  {
-    "question": "The communication between sender and receiver occurs in both directions in transmission, but only one at a time. The sender and receiver can both send and receive the information, but only one is allowed to send at any given time.",
-    "answer": "Half Duplex Communication",
-    "choices": [
-      "Duplex Communication",
-      "Half Duplex Communication",
-      "Simplex Communication",
-      "Analog Communication"
-    ]
-  },
-  {
-    "question": "The following is kind of Non-verbal communication EXCEPT one.",
-    "answer": "Phone Call",
-    "choices": [
-      "Body Language",
-      "Facial Expressions",
-      "Gestures",
-      "Phone Call"
-    ]
-  },
-  {
-    "question": "The is the unit of frequency in the International System of Units.",
-    "answer": "Hertz",
-    "choices": [
-      "Hertz",
-      "Joule",
-      "Newton",
-      "Watt"
-    ]
-  },
-  {
-    "question": "ITU stands for?",
-    "answer": "International Telecommunication Union",
-    "choices": [
-      "International Telecommunication Union",
-      "International Trade Union",
-      "International Transport Union",
-      "International Training Union"
-    ]
-  },
-  {
-    "question": "is exchanging any type of message between a sender and receiver. It can be a plain conversation between friends about their thoughts, ideas, and feelings.",
-    "answer": "Communication",
-    "choices": [
-      "Communication",
-      "Conversation",
-      "Discussion",
-      "Dialogue"
-    ]
-  },
-  {
-    "question": "Types of communication channel that conducts electricity and allows the flow of charge such metals and metal alloys.",
-    "answer": "Electrical Conductor",
-    "choices": [
-      "Electrical Conductor",
-      "Optical Media",
-      "Sonars",
-      "Wireless Media"
-    ]
-  },
-  {
-    "question": "Types of frequency in the range of 300 kilohertz (kHz) to 3 megahertz (MHz). This used for FM radio broadcasting.",
-    "answer": "Medium Frequency",
-    "choices": [
-      "High Frequency",
-      "Low Frequency",
-      "Medium Frequency",
-      "Ultra High Frequency"
-    ]
-  },
-  {
-    "question": "It is the medium wherein an electronic signal is sent from one point to another.",
-    "answer": "Communication Channel",
-    "choices": [
-      "Transmitter",
-      "Receiver",
-      "Amplifier",
-      "Communication Channel"
-    ]
-  },
-  {
-    "question": "The resulting system is known as radio when free space is the channel. Radio is the term applied to any wireless communication from point to point.",
-    "answer": "Free Space",
-    "choices": [
-      "Wired",
-      "Optical",
-      "Free Space",
-      "Coaxial"
-    ]
-  },
-  {
-    "question": "is communication uses such as eye contact, facial expressions, gestures, posture, use of objects and body language.",
-    "answer": "Non-verbal",
-    "choices": [
-      "Verbal",
-      "Written",
-      "Non-verbal",
-      "Digital"
-    ]
-  },
-  {
-    "question": "The first step in sending a message is to convert it into an electronic form suitable for transmission.",
-    "answer": "Transmitter",
-    "choices": [
-      "Receiver",
-      "Amplifier",
-      "Decoder",
-      "Transmitter"
-    ]
-  },
-  {
-    "question": "Type of receiver where a circuit capable of amplifying specific frequencies while attenuating others.",
-    "answer": "Filters",
-    "choices": [
-      "Amplifiers",
-      "Tuned Circuits",
-      "Filters",
-      "Oscillators"
-    ]
-  },
-  {
-    "question": "Use an echo-reflecting technique for determining how far away objects underwater are and in what direction they are moving.",
-    "answer": "Active Sonar",
-    "choices": [
-      "Passive Sonar",
-      "Active Sonar",
-      "Infrared",
-      "Radar"
-    ]
-  },
-  {
-    "question": "What is another term for Intelligence Signal?",
-    "answer": "Information",
-    "choices": [
-      "Data",
-      "Signal",
-      "Information",
-      "Message"
-    ]
-  },
-  {
-    "question": "Type of receiver that produce a continuous, repeated, and alternating waveform without input.",
-    "answer": "Oscillators",
-    "choices": [
-      "Amplifiers",
-      "Tuned Circuits",
-      "Filters",
-      "Oscillators"
-    ]
-  },
-  {
-    "question": "In electronics, refers to communication that uses a transmitter, communication channel, and receiver with the use of electronic signals.",
-    "answer": "Communication Systems",
-    "choices": [
-      "Communication Devices",
-      "Communication Systems",
-      "Communication Channels",
-      "Communication Protocols"
-    ]
-  },
-  {
-    "question": "a camera converts light information in the scene to a video signal.",
-    "answer": "TV",
-    "choices": [
-      "Radio",
-      "TV",
-      "Computer",
-      "Mobile Phone"
-    ]
-  },
-  {
-    "question": "Types of frequency ranged from 30–300 kHz.",
-    "answer": "Low Frequency",
-    "choices": [
-      "High Frequency",
-      "Low Frequency",
-      "Medium Frequency",
-      "Ultra High Frequency"
-    ]
-  },
-  {
-    "question": "is used to convert the sound to an electronic audio signal for voice messages.",
-    "answer": "Microphone",
-    "choices": [
-      "Speaker",
-      "Microphone",
-      "Headphones",
-      "Earphones"
-    ]
-  },
-  {
-    "question": "Type of receiver that combine two or more electronic signals into one or two output signals.",
-    "answer": "Mixer",
-    "choices": [
-      "Amplifier",
-      "Tuner",
-      "Decoder",
-      "Mixer"
-    ]
-  }
-];
-
-        var currentQuestionIndex = 0;
-        var answered = false; // Variable to track whether the question has been answered
-
-        // This function creates the quiz form
-        function createQuiz() {
-            answered = false; // Reset the answered status for each new question
-            var form = document.getElementById('quiz-form');
-            var question = quizData[currentQuestionIndex];
-            var questionDiv = document.createElement('div');
-            questionDiv.className = 'form-group';
-            questionDiv.innerHTML = '<label>' + question.question + '</label>';
-            for (var j = 0; j < question.choices.length; j++) {
-                var choice = question.choices[j];
-                var choiceId = 'question' + currentQuestionIndex + 'choice' + j;
-                questionDiv.innerHTML += '<div class="form-check"><input class="form-check-input" type="radio" id="' + choiceId + '" name="question" value="' + choice + '"><label class="form-check-label" for="' + choiceId + '">' + choice + '</label></div>';
-            }
-            form.innerHTML = '';
-            form.appendChild(questionDiv);
-            document.querySelector('.btn-next').style.display = 'none'; // Hide Next button initially
-            document.querySelector('.btn-primary').style.display = 'block'; // Show Submit button initially
-            // Hide the final result container initially
-            document.getElementById('final-result').classList.add('d-none');
-        }
-
-        // This function checks the answer and shows the next question
-        function submitAnswer() {
+  <button id="toggle-btn" onclick="toggleSidebar()">☰</button>
 
 
-            var form = document.getElementById('quiz-form');
-            var selectedOption = form.querySelector('input[name="question"]:checked');
 
-            console.log("Selected Option:", selectedOption); // Log the selected option
+  <!-- Add Bootstrap JS and its dependencies -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
+  <script>
+    // This is the data for the quiz questions, answers, and choices
+    var quizData = [
+      {
+        "question": "Types of communication channel that use optic cable or light pipe that carries the message on a light wave.",
+        "answer": "Optical Media",
+        "choices": [
+          "Electrical Conductor",
+          "Optical Media",
+          "Sonars",
+          "Wireless Media"
+        ]
+      },
+      {
+        "question": "What way of communication shown above?",
+        "answer": "Simplex Communication",
+        "choices": [
+          "Duplex Communication",
+          "Half Duplex Communication",
+          "Simplex Communication",
+          "Analog Communication"
+        ]
+      },
+      {
+        "question": "It is a set of electronic components and circuits that accept transmitted messages from the channel and translate them back, which humans understand.",
+        "answer": "Receiver",
+        "choices": [
+          "Transmitter",
+          "Receiver",
+          "Amplifier",
+          "Decoder"
+        ]
+      },
+      {
+        "question": "Type of receiver where resonant circuits, combine an inductor and capacitor to make a circuit responsive to a frequency.",
+        "answer": "Tuned Circuits",
+        "choices": [
+          "Amplifiers",
+          "Tuned Circuits",
+          "Filters",
+          "Oscillators"
+        ]
+      }
+    ];
 
-            if (!selectedOption) {
-                // No option selected
-                var result = document.getElementById('result');
-                result.textContent = 'Incorrect. No option selected.';
-                result.style.color = 'red';
-                answered = true; // Set the answered status to true
-                document.querySelector('.btn-next').style.display = 'block'; // Show Next button
-                document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
-                disableOptions(); // Disable options after marking as incorrect
-                return;
-            }
+    //Script starts here
 
-            if (answered) return; // If already answered, do nothing
-            var answer = selectedOption.value;
-            var result = document.getElementById('result');
-            if (answer === quizData[currentQuestionIndex].answer) {
-                result.textContent = 'Correct!';
-                result.style.color = 'green';
-            } else {
-                result.textContent = 'Incorrect. The correct answer was: ' + quizData[currentQuestionIndex].answer;
-                result.style.color = 'red';
-                highlightCorrectAnswer();
-            }
-            answered = true; // Set the answered status to true
-            disableOptions(); // Disable options after submitting answer
-            document.querySelector('.btn-next').style.display = 'block'; // Show Next button
-            document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
-        }
-
-        // This function disables the options after submitting the answer
-        function disableOptions() {
-            var options = document.querySelectorAll('.form-check input');
-            options.forEach(function (option) {
-                option.disabled = true;
-            });
-        }
-
-        function nextQuestion() {
-    var progress = (currentQuestionIndex + 1) / quizData.length * 100;
-    document.querySelector('.progress-bar').style.width = progress + '%';
-    var result = document.getElementById('result');
-    result.textContent = '';
-
-    var selectedOption = document.querySelector('input[name="question"]:checked');
-    if (selectedOption) {
-        selectedOption.checked = false;
+    // Function to toggle the visibility of the sidebar
+    function toggleSidebar() {
+      var sidebar = document.getElementById('sidebar');
+      sidebar.style.display = (sidebar.style.display === 'none' || sidebar.style.display === '') ? 'block' : 'none';
+    }
+    // Function to clone an array
+    function cloneArray(array) {
+      return array.map(item => ({ ...item }));
     }
 
-    currentQuestionIndex++;
 
-    if (currentQuestionIndex < quizData.length) {
-        setTimeout(function () {
-            createQuiz();
-        }, 50);  // Adjust the delay time if needed
-    } else {
+    // Function to shuffle an array
+    function shuffleArray(array) {
+      for (let i = 0; i < array.length; i++) {
+        array[i].choices = array[i].choices.sort(() => Math.random() - 0.5);
+      }
+      return array;
+    }
+
+
+    var currentQuestionIndex = 0;
+    var answered = false; // Variable to track whether the question has been answered
+
+    // This function creates the quiz form
+    function createQuiz() {
+      answered = false;
+      var clonedQuizData = cloneArray(quizData);
+      shuffleArray(clonedQuizData);
+      var form = document.getElementById('quiz-form');
+      var question = clonedQuizData[currentQuestionIndex];
+      var questionDiv = document.createElement('div');
+      questionDiv.className = 'form-group';
+      questionDiv.innerHTML = '<label>' + question.question + '</label>';
+
+      // Add a data attribute to store the correct answer index
+      questionDiv.setAttribute('data-correct-index', question.choices.indexOf(question.answer));
+
+      for (var j = 0; j < question.choices.length; j++) {
+        var choice = question.choices[j];
+        var choiceId = 'question' + currentQuestionIndex + 'choice' + j;
+        questionDiv.innerHTML += '<div class="form-check"><input class="form-check-input" type="radio" id="' + choiceId + '" name="question" value="' + choice + '"><label class="form-check-label" for="' + choiceId + '">' + choice + '</label></div>';
+      }
+
+      form.innerHTML = '';
+      form.appendChild(questionDiv);
+      document.querySelector('.btn-next').style.display = 'none';
+      document.querySelector('.btn-primary').style.display = 'block';
+      document.getElementById('final-result').classList.add('d-none');
+
+      // Populate the question list in the sidebar
+      var questionList = document.getElementById('question-list');
+      questionList.innerHTML = '';
+      for (var i = 0; i < clonedQuizData.length; i++) {
+        var listItem = document.createElement('li');
+        listItem.innerHTML = '<a onclick="goToQuestion(' + i + ')">Question ' + (i + 1) + '</a>';
+        questionList.appendChild(listItem);
+      }
+    }
+
+    // Function to navigate to a specific question
+    function goToQuestion(index) {
+      currentQuestionIndex = index;
+      createQuiz();
+    }
+
+
+
+
+
+    // This function checks the answer and shows the next question
+    function submitAnswer() {
+      var form = document.getElementById('quiz-form');
+      var selectedOption = form.querySelector('input[name="question"]:checked');
+
+      if (!selectedOption) {
+        // No option selected
+        var result = document.getElementById('result');
+        result.textContent = 'Incorrect. No option selected.';
+        result.style.color = 'red';
+        answered = true; // Set the answered status to true
+        document.querySelector('.btn-next').style.display = 'block'; // Show Next button
+        document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
+        disableOptions(); // Disable options after marking as incorrect
+        return;
+      }
+
+      if (answered) return; // If already answered, do nothing
+      var answer = selectedOption.value;
+      var result = document.getElementById('result');
+      if (answer === quizData[currentQuestionIndex].answer) {
+        result.textContent = 'Correct!';
+        result.style.color = 'green';
+      } else {
+        result.textContent = 'Incorrect. The correct answer was: ' + quizData[currentQuestionIndex].answer;
+        result.style.color = 'red';
+        highlightCorrectAnswer();
+      }
+      answered = true; // Set the answered status to true
+      disableOptions(); // Disable options after submitting answer
+      document.querySelector('.btn-next').style.display = 'block'; // Show Next button
+      document.querySelector('.btn-primary').style.display = 'none'; // Hide Submit button
+    }
+
+
+    // This function disables the options after submitting the answer
+    function disableOptions() {
+      var options = document.querySelectorAll('.form-check input');
+      options.forEach(function (option) {
+        option.disabled = true;
+      });
+    }
+
+    function nextQuestion() {
+      var progress = (currentQuestionIndex + 1) / quizData.length * 100;
+      document.querySelector('.progress-bar').style.width = progress + '%';
+      var result = document.getElementById('result');
+      result.textContent = '';
+
+      var selectedOption = document.querySelector('input[name="question"]:checked');
+      if (selectedOption) {
+        selectedOption.checked = false;
+      }
+
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < quizData.length) {
+        createQuiz(); // Call createQuiz directly
+      } else {
         result.textContent = 'Quiz completed!';
         result.style.color = 'black';
         document.querySelector('.btn-next').style.display = 'none';
-    }
+      }
 
-    answered = false;
-    document.querySelector('.btn-next').style.display = 'none';
-    document.querySelector('.btn-primary').style.display = 'block';
+      answered = false;
+      document.querySelector('.btn-next').style.display = 'none';
+      document.querySelector('.btn-primary').style.display = 'block';
 
-    console.log("Current Index after moving:", currentQuestionIndex);
+      console.log("Current Index after moving:", currentQuestionIndex);
 
-    if (currentQuestionIndex === quizData.length) {
+      if (currentQuestionIndex === quizData.length) {
         displayFinalResult();
+      }
     }
-}
 
-
-
-        // This function highlights the correct answer
-        function highlightCorrectAnswer() {
-            var correctAnswer = quizData[currentQuestionIndex].answer;
-            var labels = document.querySelectorAll('.form-check label');
-            labels.forEach(function (label) {
-                if (label.textContent === correctAnswer) {
-                    label.style.backgroundColor = 'lightgreen';
-                }
-            });
+    // This function highlights the correct answer
+    function highlightCorrectAnswer() {
+      var correctAnswer = quizData[currentQuestionIndex].answer;
+      var labels = document.querySelectorAll('.form-check label');
+      labels.forEach(function (label) {
+        label.style.backgroundColor = ''; // Reset background color for all options
+        if (label.textContent === correctAnswer) {
+          label.style.backgroundColor = 'lightgreen';
         }
+      });
+    }
 
-        function displayFinalResult() {
-            var resultContainer = document.getElementById('final-result');
-            resultContainer.textContent = 'Quiz completed! Your final result is: ' + calculateScore() + ' out of ' + quizData.length;
-            resultContainer.style.color = 'black';
-            resultContainer.classList.remove('d-none'); // Remove the 'd-none' class to show the container
+
+    function displayFinalResult() {
+      var resultContainer = document.getElementById('final-result');
+      var score = calculateScore();
+      resultContainer.textContent = 'Quiz completed! Your final result is: ' + score + ' out of ' + quizData.length;
+      resultContainer.style.color = 'black';
+      resultContainer.classList.remove('d-none'); // Remove the 'd-none' class to show the container
+    }
+
+    function calculateScore() {
+      var correctAnswers = 0;
+      for (var i = 0; i < quizData.length; i++) {
+        var selectedAnswer = getSelectedAnswer(i);
+        console.log("Question " + (i + 1) + ": Selected - " + selectedAnswer + ", Correct - " + quizData[i].answer);
+        if (selectedAnswer !== null && selectedAnswer === quizData[i].answer) {
+          console.log("Correct! Adding to score.");
+          correctAnswers++;
+        } else {
+          console.log("Incorrect!");
         }
+      }
+      console.log("Total Correct Answers: " + correctAnswers);
+      return correctAnswers;
+    }
 
-        function calculateScore() {
-            var correctAnswers = 0;
-            for (var i = 0; i < quizData.length; i++) {
-                var selectedAnswer = getSelectedAnswer(i);
-                console.log("Question " + (i + 1) + ": Selected - " + selectedAnswer + ", Correct - " + quizData[i].answer);
-                if (selectedAnswer !== null && selectedAnswer === quizData[i].answer) {
-                    correctAnswers++;
-                }
-            }
-            console.log("Total Correct Answers: " + correctAnswers);
-            return correctAnswers;
-        }
+    function getSelectedAnswer(index) {
+      var form = document.getElementById('quiz-form');
+      var selectedOption = form.querySelector('input[name="question"]:checked');
 
+      if (selectedOption) {
+        var selectedAnswer = selectedOption.value;
+        console.log("Found selected answer:", selectedAnswer);
+        return selectedAnswer;
+      }
 
-        function getSelectedAnswer(index) {
-            var form = document.getElementById('quiz-form');
-            var radioButtons = form.querySelectorAll('input[name="question"]');
+      console.log("Selected answer not found!");
+      return null;
+    }
 
-            for (var i = 0; i < radioButtons.length; i++) {
-                if (radioButtons[i].checked) {
-                    return radioButtons[i].value;
-                }
-            }
-
-            return null;
-        }
-
-
-        // Create the quiz when the page loads
-        window.onload = createQuiz;
-    </script>
+    // Create the quiz when the page loads
+    window.onload = createQuiz;
+  </script>
 </body>
 
 </html>
